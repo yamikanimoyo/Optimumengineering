@@ -90,13 +90,6 @@ p{ margin: 0 0 1em; color: var(--ink-soft); }
   color: var(--pink);
   margin-bottom: 1em;
 }
-.eyebrow::before{
-  content: '';
-  width: 28px;
-  height: 2px;
-  background: var(--pink);
-}
-
 .lede{
   font-size: clamp(1.02rem, 1.3vw, 1.18rem);
   max-width: 62ch;
@@ -129,7 +122,6 @@ p{ margin: 0 0 1em; color: var(--ink-soft); }
   .lede{ font-size: .96rem; }
 
   .eyebrow{ font-size: .68rem; margin-bottom: .8em; }
-  .eyebrow::before{ width: 20px; }
 
   .section{ padding: 2.4rem 0; }
   .section-head{ margin-bottom: 1.8rem; }
