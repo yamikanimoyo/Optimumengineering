@@ -29,6 +29,60 @@
   [data-reveal-group].is-visible > *:nth-child(8){ transition-delay: .75s; }
 }
 
+.page-transition{
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  background: #000;
+  opacity: 0;
+  animation: pageScrimCycle .4s ease reverse forwards;
+}
+@keyframes pageScrimCycle{
+  0%{ opacity: 0; }
+  100%{ opacity: .6; }
+}
+body.is-leaving .page-transition{
+  animation: pageScrimCycle .3s ease forwards;
+}
+.page-transition__logo-wrap{
+  position: absolute;
+  top: 50%; left: 50%;
+  width: clamp(48px, 6vw, 72px);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: pageLogoCycle .4s ease reverse forwards;
+}
+.page-transition__logo{
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: spinLoader 1s linear infinite;
+}
+@keyframes pageLogoCycle{
+  0%{ opacity: 0; }
+  100%{ opacity: 1; }
+}
+@keyframes spinLoader{
+  from{ transform: rotate(0deg); }
+  to{ transform: rotate(360deg); }
+}
+
+body.is-leaving .page-transition__logo-wrap{
+  animation: pageLogoCycle .3s ease forwards;
+}
+
+body > *:not(.page-transition){
+  animation: pageContentDim .4s ease forwards;
+}
+@keyframes pageContentDim{
+  from{ opacity: .3; }
+  to{ opacity: 1; }
+}
+body.is-leaving > *:not(.page-transition){
+  animation: pageContentDim .3s ease reverse forwards;
+}
+
 @keyframes fadeInUp{
   from{ opacity: 0; transform: translateY(26px); }
   to{ opacity: 1; transform: translateY(0); }

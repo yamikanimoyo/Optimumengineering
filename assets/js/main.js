@@ -1,4 +1,26 @@
 (function () {
+  if (document.querySelector('.page-transition')) {
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href]');
+      if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+      let url;
+      try {
+        url = new URL(href, window.location.href);
+      } catch (err) {
+        return;
+      }
+      if (url.origin !== window.location.origin) return;
+      if (url.pathname === window.location.pathname && url.hash) return;
+      e.preventDefault();
+      document.body.classList.add('is-leaving');
+      setTimeout(() => {
+        window.location.href = href;
+      }, 300);
+    });
+  }
+
   const header = document.querySelector('.site-header');
   const toggle = document.querySelector('.nav__toggle');
   const nav = document.querySelector('.nav');
